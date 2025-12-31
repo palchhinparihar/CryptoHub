@@ -32,11 +32,11 @@ const Home = () => {
   return (
     <div className="home">
       <div className="hero">
-        <h1 className="hero-title">Discover & Track Crypto Instantly</h1>
-        <p className="hero-sub">
+        <h1 data-aos="fade-in" className="hero-title">Discover & Track Crypto Instantly</h1>
+        <p data-aos="fade-in" className="hero-sub">
           Welcome to CryptoHub — your gateway to real-time prices, trending coins, and powerful analytics. Search any coin and start exploring the world of crypto!
         </p>
-        <form className="hero-form" onSubmit={searchHandler} autoComplete="off">
+        <form data-aos="zoom-in" className="hero-form" onSubmit={searchHandler} autoComplete="off">
           <input
             onChange={inputHandler}
             list="coinlist"
@@ -51,7 +51,7 @@ const Home = () => {
           <button type="submit">Search</button>
         </form>
       </div>
-      <div className="crypto-table">
+      <div data-aos="fade-up"className="crypto-table">
         <div className="table-layout">
           <p>#</p>
           <p>Coins</p>
