@@ -1,81 +1,116 @@
+import React from "react";
 import "./Pricing.css";
+import { motion } from "framer-motion";
+import { FiCheck, FiX } from "react-icons/fi";
 
 export default function Pricing() {
-      const plans = [
-  {
-    name: "Free",
-    price: "₹0",
-    description: "Get started with essential crypto tools.",
-    features: [
-      { label: "Track top 50 cryptocurrencies", available: true },
-      { label: "Real-time price updates", available: true },
-      { label: "Basic charts & analytics", available: true },
-      { label: "Coin detail pages", available: true },
-      { label: "Responsive dashboard", available: true },
-      { label: "Portfolio tracking", available: false },
-      { label: "Price alerts & notifications", available: false },
-      { label: "Ad-free experience", available: false },
-      { label: "Advanced charting tools", available: false },
-    ],
-  },
-  {
-    name: "Pro",
-    price: "₹399/month",
-    description: "Unlock advanced features for serious traders.",
-    features: [
-      { label: "Track up to 500 coins", available: true },
-      { label: "Advanced charting tools", available: true },
-      { label: "Portfolio tracking", available: true },
-      { label: "Price alerts & notifications", available: true },
-      { label: "Ad-free experience", available: true },
-      { label: "Unlimited coins & watchlists", available: false },
-      { label: "Export data to CSV/Excel", available: false },
-      { label: "1-on-1 onboarding & support", available: false },
-    ],
-  },
-  {
-    name: "Premium",
-    price: "₹999/month",
-    description: "All-access pass for power users and professionals.",
-    features: [
-      { label: "Unlimited coins & watchlists", available: true },
-      { label: "Customizable analytics", available: true },
-      { label: "Export data to CSV/Excel", available: true },
-      { label: "Early access to new features", available: true },
-      { label: "1-on-1 onboarding & support", available: true },
-    ],
-  },
-];
+  const plans = [
+    {
+      name: "Explorer",
+      price: "Free",
+      period: "forever",
+      description: "Essential tools for crypto beginners.",
+      highlight: false,
+      features: [
+        { label: "Top 50 Coins Tracking", available: true },
+        { label: "Real-time Prices", available: true },
+        { label: "Basic Charts", available: true },
+        { label: "Portfolio Tracker", available: false },
+        { label: "Price Alerts", available: false },
+        { label: "AI Insights", available: false },
+      ],
+    },
+    {
+      name: "Voyager",
+      price: "₹399",
+      period: "/month",
+      description: "Advanced analytics for serious traders.",
+      highlight: true,
+      features: [
+        { label: "Top 500 Coins Tracking", available: true },
+        { label: "Advanced Charting", available: true },
+        { label: "Portfolio Tracker", available: true },
+        { label: "Price Alerts (5/day)", available: true },
+        { label: "Ad-free Experience", available: true },
+        { label: "AI Insights", available: false },
+      ],
+    },
+    {
+      name: "Galactic",
+      price: "₹999",
+      period: "/month",
+      description: "Unlimited power for professionals.",
+      highlight: false,
+      features: [
+        { label: "Unlimited Tracking", available: true },
+        { label: "Pro Analytics Suite", available: true },
+        { label: "Unlimited Portfolio", available: true },
+        { label: "Unlimited Alerts", available: true },
+        { label: "Ad-free Experience", available: true },
+        { label: "AI Insights & Signals", available: true },
+      ],
+    },
+  ];
 
   return (
     <div className="pricing-page">
-      <div data-aos="fade-in" className="pricing-title">Pricing Plans</div>
-      <div data-aos="fade-in" className="pricing-desc">Choose the plan that fits your crypto journey. Upgrade anytime!</div>
-      <div className="pricing-cards">
-        {plans.map((plan, index) => (
-          <div key={index} data-aos={index % 2 === 0 ? "fade-up" : "fade-down"} className="pricing-card">
-            <h2>{plan.name}</h2>
-            <div className="price">{plan.price}</div>
-            <div className="desc">{plan.description}</div>
-            <ul className="pricing-features">
-              {plan.features.map((feature, i) => (
-  <li
-    key={i}
-    className={feature.available ? "feature-available" : "feature-unavailable"}
-  >
-    {feature.available ? "✔" : "✖"} {feature.label}
-  </li>
-))}
+      {/* Background Ambience */}
+      <div className="glow-spot top-center"></div>
 
-            </ul>
-            <button class="pricing-button">
-              {plan.name === "Free" ? "Start for Free" : "Get Started"}
-            </button>
-          </div>
-        ))}
+      <div className="pricing-header">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          Unlock Your <span className="text-gradient-purple">Crypto Potential</span>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Choose the perfect trajectory for your investment journey.
+        </motion.p>
       </div>
-      <div data-aos="fade-out" style={{textAlign: 'center', marginTop: '40px', color: '#bdbdbd', fontSize: '1.1rem'}}>
-        All plans include secure access, regular updates, and community support.
+
+      <div className="pricing-cards-container">
+        {plans.map((plan, index) => (
+          <motion.div
+            key={index}
+            className={`pricing-card glass-panel ${plan.highlight ? "highlighted" : ""}`}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ y: -10, transition: { duration: 0.3 } }}
+          >
+            {plan.highlight && <div className="popular-tag">Most Popular</div>}
+
+            <div className="card-header">
+              <h3>{plan.name}</h3>
+              <div className="price-wrapper">
+                <span className="amount">{plan.price}</span>
+                <span className="period">{plan.period}</span>
+              </div>
+              <p className="description">{plan.description}</p>
+            </div>
+
+            <div className="divider"></div>
+
+            <ul className="features-list">
+              {plan.features.map((feature, i) => (
+                <li key={i} className={feature.available ? "" : "unavailable"}>
+                  {feature.available ? <FiCheck className="icon-check" /> : <FiX className="icon-x" />}
+                  <span>{feature.label}</span>
+                </li>
+              ))}
+            </ul>
+
+            <button className={`btn-plan ${plan.highlight ? "btn-neon-purple" : "btn-glass"}`}>
+              {plan.name === "Explorer" ? "Get Started" : "Upgrade Now"}
+            </button>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
